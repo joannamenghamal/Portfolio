@@ -194,6 +194,42 @@ body::before {
 }
 .btn-secondary:hover { color: var(--text); border-color: var(--border); }
 
+/* ── INLINE BREAKDOWNS ── */
+details.bd { margin-top: 16px; }
+details.bd > summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 10px 20px; border-radius: 8px;
+  transition: all 0.15s;
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border2);
+}
+details.bd > summary::-webkit-details-marker { display: none; }
+details.bd > summary:hover { color: var(--text); border-color: var(--border); }
+details.bd[open] > summary { color: var(--text); border-color: var(--border); }
+.bd-panel {
+  margin-top: 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 900px) { .bd-panel { grid-template-columns: 1fr; } }
+.bd-panel-single { grid-template-columns: 1fr !important; }
+.bd-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.bd-text {
+  font-size: 13px; color: var(--text2); line-height: 1.7; margin: 0;
+}
+
 /* ── MORE PROJECTS ── */
 .more {
   max-width: 1100px;
@@ -238,6 +274,20 @@ body::before {
   border: 1px solid var(--border2);
   padding: 3px 8px; border-radius: 5px;
 }
+details.bd-mini { margin-top: 16px; }
+details.bd-mini > summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 8px;
+  transition: all 0.15s;
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border2);
+}
+details.bd-mini > summary::-webkit-details-marker { display: none; }
+details.bd-mini > summary:hover { color: var(--text); border-color: var(--border); }
+details.bd-mini[open] > summary { color: var(--text); border-color: var(--border); }
 
 /* ── ABOUT ── */
 .about {
@@ -332,7 +382,7 @@ footer a:hover { color: var(--text2); }
       TestPilot AI automates that entirely — giving every store a live health score so you never have to test by hand again.
     </p>
     <p class="card-desc" style="margin-top:-16px;">
-      Built full-stack system using Playwright, Node.js, and React to automate checkout validation and trigger tests after deploy.
+      Designed and shipped the full-stack system using Playwright, Node.js, and React to automate checkout validation and trigger tests after deploy.
     </p>
     <div class="card-highlight">
       Deploy with confidence. Know every checkout is working without lifting a finger.
@@ -349,8 +399,35 @@ footer a:hover { color: var(--text2); }
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         Visit Site
       </a>
-      <a href="#breakdown-testpilot" class="btn btn-secondary">Technical Breakdown</a>
     </div>
+    <details class="bd">
+      <summary>Technical Breakdown</summary>
+      <div class="bd-panel">
+        <div>
+          <div class="bd-label">Architecture</div>
+          <p class="bd-text">
+            <strong style="color:var(--text);">Frontend:</strong> React dashboard — test flows, run history, and alerting UI.<br><br>
+            <strong style="color:var(--text);">Backend:</strong> Node.js/Express — Playwright automation engine, REST API for triggering and managing test runs, persistent storage for artifacts and logs.<br><br>
+            <strong style="color:var(--text);">Infra:</strong> Railway. Shopify deploy webhooks trigger automated runs on each deployment.
+          </p>
+        </div>
+        <div>
+          <div class="bd-label">My Work</div>
+          <p class="bd-text">
+            Designed the Playwright-based automation runner to simulate real user checkout flows. Architected backend APIs to trigger runs manually or via webhook. Designed Shopify-specific checkout handling including variant selection via API and cart injection before UI validation. Engineered a run classification system to detect checkout success, UI failures, and navigation errors. Implemented retry logic and failure thresholds to reduce false alerts. Added screenshot and log artifact generation for debugging.
+          </p>
+        </div>
+        <div>
+          <div class="bd-label">Key Challenges</div>
+          <p class="bd-text">
+            <strong style="color:var(--text);">Unreliable UI across themes:</strong> Designed a hybrid approach using API-based cart insertion and flexible role/text-based selector fallbacks.<br><br>
+            <strong style="color:var(--text);">False positives:</strong> Implemented retry system with delay — only alert after consecutive failures.<br><br>
+            <strong style="color:var(--text);">Partial page loads:</strong> Combined URL checks, DOM content validation, and form detection to distinguish real failures from transient issues.<br><br>
+            <strong style="color:var(--text);">Outcome:</strong> Reduced manual checkout testing from ~30 min per deploy to fully automated runs with actionable failure insights.
+          </p>
+        </div>
+      </div>
+    </details>
   </div>
 
   <!-- LegalBill AI -->
@@ -364,7 +441,7 @@ footer a:hover { color: var(--text2); }
       Speak your work — get properly formatted legal billing entries in seconds. Built for ProLaw and Clio.
     </p>
     <p class="card-desc" style="margin-top:-16px;">
-      Developed mobile app and backend to convert voice input into structured legal billing entries using OpenAI APIs.
+      Designed and shipped the mobile app and backend to convert voice input into structured legal billing entries using OpenAI APIs.
     </p>
     <div class="card-highlight">
       Voice-to-billing powered by AI. Stop losing what you've already earned.
@@ -384,8 +461,36 @@ footer a:hover { color: var(--text2); }
       <a href="https://legal-billing-ai-landing.vercel.app" target="_blank" class="btn btn-secondary">
         Landing Page
       </a>
-      <a href="#breakdown-legalbill" class="btn btn-secondary">Technical Breakdown</a>
     </div>
+    <details class="bd">
+      <summary>Technical Breakdown</summary>
+      <div class="bd-panel">
+        <div>
+          <div class="bd-label">Architecture</div>
+          <p class="bd-text">
+            <strong style="color:var(--text);">Mobile:</strong> React Native / Expo — voice input, matter selection, billing entry output with copy-to-clipboard.<br><br>
+            <strong style="color:var(--text);">Backend:</strong> Node.js API on Railway — handles transcription input, OpenAI integration, and prompt processing.<br><br>
+            <strong style="color:var(--text);">AI Pipeline:</strong> Speech → transcription → LLM formatting into structured billing entries (0.1 hr increments, action-oriented phrasing).<br><br>
+            <strong style="color:var(--text);">Infra:</strong> Railway (backend), EAS (Android APK builds), Vercel (landing page). Clio-compatible workflows.
+          </p>
+        </div>
+        <div>
+          <div class="bd-label">My Work</div>
+          <p class="bd-text">
+            Designed the mobile-first voice interface for capturing work logs. Architected the backend API to process transcription input and generate structured billing entries. Designed prompt templates to normalize messy voice input into professional legal billing language. Implemented domain-specific formatting rules including action-oriented phrasing and standardized entry structure. Kept OpenAI keys server-side by decoupling the app from any direct AI calls.
+          </p>
+        </div>
+        <div>
+          <div class="bd-label">Key Challenges</div>
+          <p class="bd-text">
+            <strong style="color:var(--text);">Unstructured voice input:</strong> Designed prompt templates to enforce consistent formatting and normalize inconsistent speech.<br><br>
+            <strong style="color:var(--text);">Legal billing standards:</strong> Generic AI outputs aren't billable — fine-tuned prompts for legal tone and added formatting validation.<br><br>
+            <strong style="color:var(--text);">Frictionless UX:</strong> Optimized the flow to speak → process → display instantly with minimal steps.<br><br>
+            <strong style="color:var(--text);">Outcome:</strong> Eliminates end-of-day time reconstruction — structured, ready-to-use billing entries immediately after input.
+          </p>
+        </div>
+      </div>
+    </details>
   </div>
 
 </div>
@@ -405,9 +510,26 @@ footer a:hover { color: var(--text2); }
         <span class="mini-tag">Cognito</span>
         <span class="mini-tag">Terraform</span>
       </div>
-      <div style="margin-top:16px;">
-        <a href="#breakdown-serverless" class="btn btn-secondary" style="font-size:10px;padding:7px 14px;">Technical Details</a>
-      </div>
+      <details class="bd-mini">
+        <summary>Technical Details</summary>
+        <div class="bd-panel bd-panel-single" style="margin-top:12px;">
+          <div>
+            <div class="bd-label">Architecture</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              <strong style="color:var(--text);">Frontend:</strong> Static site on S3. <strong style="color:var(--text);">Backend:</strong> AWS Lambda (Node.js) behind API Gateway. <strong style="color:var(--text);">Data:</strong> DynamoDB. <strong style="color:var(--text);">Auth:</strong> Cognito with JWT via API Gateway authorizer. <strong style="color:var(--text);">Infra:</strong> Fully provisioned via Terraform.
+            </p>
+            <div class="bd-label">My Work</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              Designed and provisioned the complete infrastructure using Terraform. Implemented Lambda functions for data operations. Integrated JWT authentication via Cognito and API Gateway authorizer.
+            </p>
+            <div class="bd-label">Key Challenges</div>
+            <p class="bd-text">
+              <strong style="color:var(--text);">Lambda event handling:</strong> Standardized request parsing for API Gateway v2 event structure.<br>
+              <strong style="color:var(--text);">Auth integration:</strong> Configured Cognito issuer and JWT validation, debugged unauthorized responses.
+            </p>
+          </div>
+        </div>
+      </details>
     </div>
 
     <div class="mini-card">
@@ -419,9 +541,26 @@ footer a:hover { color: var(--text2); }
         <span class="mini-tag">Node.js</span>
         <span class="mini-tag">Gemini API</span>
       </div>
-      <div style="margin-top:16px;">
-        <a href="#breakdown-summarizer" class="btn btn-secondary" style="font-size:10px;padding:7px 14px;">Technical Details</a>
-      </div>
+      <details class="bd-mini">
+        <summary>Technical Details</summary>
+        <div class="bd-panel bd-panel-single" style="margin-top:12px;">
+          <div>
+            <div class="bd-label">Architecture</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              <strong style="color:var(--text);">Frontend:</strong> React (TypeScript) — document upload and summarized output display. <strong style="color:var(--text);">Backend:</strong> Node.js API — input processing and prompt orchestration. <strong style="color:var(--text);">AI Layer:</strong> Gemini API with structured prompts.
+            </p>
+            <div class="bd-label">My Work</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              Designed the frontend and backend pipeline. Engineered prompt strategy for concise, context-preserving summaries. Implemented text chunking to handle large documents within model context limits.
+            </p>
+            <div class="bd-label">Key Challenges</div>
+            <p class="bd-text">
+              <strong style="color:var(--text);">Accuracy:</strong> Structured prompts with constraints to reduce hallucination.<br>
+              <strong style="color:var(--text);">Large inputs:</strong> Chunked text before processing to stay within context limits.
+            </p>
+          </div>
+        </div>
+      </details>
     </div>
 
     <div class="mini-card">
@@ -432,9 +571,26 @@ footer a:hover { color: var(--text2); }
         <span class="mini-tag">Tesseract OCR</span>
         <span class="mini-tag">Pandas</span>
       </div>
-      <div style="margin-top:16px;">
-        <a href="#breakdown-ocr" class="btn btn-secondary" style="font-size:10px;padding:7px 14px;">Technical Details</a>
-      </div>
+      <details class="bd-mini">
+        <summary>Technical Details</summary>
+        <div class="bd-panel bd-panel-single" style="margin-top:12px;">
+          <div>
+            <div class="bd-label">Architecture</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              <strong style="color:var(--text);">Processing:</strong> Tesseract OCR for text extraction. <strong style="color:var(--text);">Post-processing:</strong> Python and Pandas for data cleaning, normalization, and structured output.
+            </p>
+            <div class="bd-label">My Work</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              Designed the extraction pipeline. Engineered post-processing logic to parse raw OCR output into structured fields — item names, prices, totals. Added data cleaning and flexible pattern-based parsing for inconsistent receipt formats.
+            </p>
+            <div class="bd-label">Key Challenges</div>
+            <p class="bd-text">
+              <strong style="color:var(--text);">Noisy output:</strong> Applied text normalization and filtering rules.<br>
+              <strong style="color:var(--text);">Inconsistent formats:</strong> Designed flexible pattern-based parsing to handle layout variation.
+            </p>
+          </div>
+        </div>
+      </details>
     </div>
 
     <div class="mini-card">
@@ -447,190 +603,29 @@ footer a:hover { color: var(--text2); }
         <span class="mini-tag">API Gateway</span>
         <span class="mini-tag">DynamoDB</span>
       </div>
-      <div style="margin-top:16px;">
-        <a href="#breakdown-iot" class="btn btn-secondary" style="font-size:10px;padding:7px 14px;">Technical Details</a>
-      </div>
+      <details class="bd-mini">
+        <summary>Technical Details</summary>
+        <div class="bd-panel bd-panel-single" style="margin-top:12px;">
+          <div>
+            <div class="bd-label">Architecture</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              <strong style="color:var(--text);">Device Communication:</strong> MQTT over AWS IoT Core. <strong style="color:var(--text);">Backend:</strong> Lambda triggered by IoT rules. <strong style="color:var(--text);">API:</strong> API Gateway REST endpoints. <strong style="color:var(--text);">Storage:</strong> DynamoDB for low-latency telemetry.
+            </p>
+            <div class="bd-label">My Work</div>
+            <p class="bd-text" style="margin-bottom:12px;">
+              Designed the MQTT topic structure for efficient routing. Configured AWS IoT Core for device communication. Engineered Lambda functions to process and store telemetry. Exposed REST endpoints via API Gateway for data consumers.
+            </p>
+            <div class="bd-label">Key Challenges</div>
+            <p class="bd-text">
+              <strong style="color:var(--text);">Real-time streaming:</strong> Designed publish/subscribe model for continuous device-to-cloud flow.<br>
+              <strong style="color:var(--text);">Event-driven architecture:</strong> Structured Lambda triggers from IoT rules for reliable async processing.
+            </p>
+          </div>
+        </div>
+      </details>
     </div>
 
   </div>
-</section>
-
-<!-- TECHNICAL BREAKDOWNS -->
-<section class="more" style="padding-bottom:80px;">
-  <div id="breakdown-testpilot" style="margin-bottom:48px;">
-    <div class="more-label">TestPilot AI — Technical Breakdown</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Frontend:</strong> React dashboard — test flows, run history, and alerting UI.<br><br>
-          <strong style="color:var(--text);">Backend:</strong> Node.js/Express — Playwright automation engine, REST API for triggering and managing test runs, persistent storage for artifacts and logs.<br><br>
-          <strong style="color:var(--text);">Infra:</strong> Railway for deployment. Shopify deploy webhooks trigger automated runs on each deployment.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Designed the Playwright-based automation runner to simulate real user checkout flows. Built backend APIs to trigger runs manually or via webhook and retrieve run history. Implemented Shopify-specific checkout handling including product variant selection via API and cart injection before UI validation. Built a run classification system to detect checkout success, UI failures, and navigation errors. Added retry logic and failure thresholds to reduce false alerts. Integrated screenshot and log artifact generation for debugging.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Unreliable UI across themes:</strong> Built a hybrid approach using API-based cart insertion and flexible role/text-based selector fallbacks.<br><br>
-          <strong style="color:var(--text);">False positives:</strong> Implemented retry system with delay — only alert after consecutive failures.<br><br>
-          <strong style="color:var(--text);">Partial page loads:</strong> Combined URL checks, DOM content validation, and form detection to distinguish real failures from transient issues.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> Reduced manual checkout testing from ~30 min per deploy to fully automated runs with actionable failure insights.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="breakdown-legalbill">
-    <div class="more-label">LegalBill AI — Technical Breakdown</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Mobile:</strong> React Native / Expo — voice input, matter selection, billing entry output with copy-to-clipboard.<br><br>
-          <strong style="color:var(--text);">Backend:</strong> Node.js API on Railway — handles transcription input, OpenAI integration, and prompt processing.<br><br>
-          <strong style="color:var(--text);">AI Pipeline:</strong> Speech → transcription → LLM formatting into structured billing entries (0.1 hr increments, action-oriented phrasing).<br><br>
-          <strong style="color:var(--text);">Infra:</strong> Railway (backend), EAS (Android APK builds), Vercel (landing page). Clio-compatible workflows.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Developed the mobile-first voice interface for capturing work logs. Built backend API to process transcription input and generate structured billing entries. Designed prompt templates to normalize messy voice input into professional legal billing language with consistent formatting. Implemented domain-specific rules including action-oriented phrasing and standardized entry structure. Kept OpenAI keys server-side by decoupling the app from any direct AI calls.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Unstructured voice input:</strong> Designed prompt templates to enforce consistent formatting and normalize inconsistent speech.<br><br>
-          <strong style="color:var(--text);">Legal billing standards:</strong> Generic AI outputs aren't billable — fine-tuned prompts for legal tone and added formatting validation.<br><br>
-          <strong style="color:var(--text);">Frictionless UX:</strong> Optimized the flow to speak → process → display instantly with minimal steps.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> Eliminates end-of-day time reconstruction — structured, ready-to-use billing entries immediately after input.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="breakdown-serverless" style="margin-bottom:48px;margin-top:48px;">
-    <div class="more-label">Secure Serverless Web App — Technical Details</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Frontend:</strong> Static site hosted on S3.<br><br>
-          <strong style="color:var(--text);">Backend:</strong> AWS Lambda (Node.js) behind API Gateway (HTTP API).<br><br>
-          <strong style="color:var(--text);">Data:</strong> DynamoDB for NoSQL storage with stateless access patterns.<br><br>
-          <strong style="color:var(--text);">Auth:</strong> AWS Cognito with JWT-based authentication via API Gateway authorizer.<br><br>
-          <strong style="color:var(--text);">Infra:</strong> Fully provisioned via Terraform — API Gateway routes, Lambda functions, DynamoDB tables, Cognito user pool.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Provisioned the complete infrastructure using Terraform. Implemented Lambda functions for creating and retrieving data. Integrated JWT authentication via Cognito and API Gateway authorizer. Designed stateless backend functions with DynamoDB access patterns for efficient reads and writes.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Lambda event handling:</strong> Standardized request parsing based on API Gateway v2 event structure to handle inconsistencies.<br><br>
-          <strong style="color:var(--text);">Auth integration:</strong> Configured Cognito issuer and JWT validation, debugged unauthorized responses through API Gateway.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> Fully serverless, scalable architecture with infrastructure reproducible via code and secure authenticated API access.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="breakdown-summarizer" style="margin-bottom:48px;">
-    <div class="more-label">AI Document Summarizer — Technical Details</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Frontend:</strong> React (TypeScript) — document upload and summarized output display.<br><br>
-          <strong style="color:var(--text);">Backend:</strong> Node.js API — input processing and prompt orchestration.<br><br>
-          <strong style="color:var(--text);">AI Layer:</strong> Gemini API — structured prompts for concise, context-preserving summaries.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Built the React frontend for uploading documents and displaying output. Implemented the backend pipeline to process input text and send structured prompts to the LLM. Designed a prompt strategy for concise summaries that preserve key context. Added text chunking to handle large documents before processing.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Summary accuracy:</strong> Structured prompts with constraints to reduce hallucination and keep outputs grounded.<br><br>
-          <strong style="color:var(--text);">Large inputs:</strong> Chunked text before processing to stay within model context limits.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> Reduced document review time significantly — structured summaries with improved readability and faster turnaround.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="breakdown-ocr" style="margin-bottom:48px;">
-    <div class="more-label">OCR Receipt Analyzer — Technical Details</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Input:</strong> Receipt images fed into the pipeline.<br><br>
-          <strong style="color:var(--text);">Processing:</strong> Tesseract OCR for text extraction.<br><br>
-          <strong style="color:var(--text);">Post-processing:</strong> Python and Pandas for data cleaning, normalization, and structured output.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Implemented the OCR pipeline using Tesseract. Built post-processing logic to parse raw OCR output into structured fields — item names, prices, and totals. Added data cleaning logic to remove noise and standardize extracted values. Wrote flexible parsing logic based on patterns to handle inconsistent receipt formats.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Noisy OCR output:</strong> Applied text normalization and filtering rules to clean raw extraction artifacts.<br><br>
-          <strong style="color:var(--text);">Inconsistent formats:</strong> Built flexible pattern-based parsing to handle variation across different receipt layouts.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> 85%+ accuracy in structured data extraction — automated conversion from unstructured images to usable datasets.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="breakdown-iot">
-    <div class="more-label">IoT Inverter Monitoring System — Technical Details</div>
-    <div class="about-inner" style="grid-template-columns:1fr 1fr 1fr;gap:24px;padding:32px;">
-      <div>
-        <div class="about-section-label">Architecture</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Device Communication:</strong> MQTT over AWS IoT Core — publish/subscribe model for real-time telemetry streaming.<br><br>
-          <strong style="color:var(--text);">Backend:</strong> AWS Lambda functions triggered by IoT rules to process incoming device data.<br><br>
-          <strong style="color:var(--text);">API Layer:</strong> API Gateway exposing REST endpoints for data consumers.<br><br>
-          <strong style="color:var(--text);">Storage:</strong> DynamoDB for low-latency telemetry storage and retrieval.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">What I Built</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          Simulated real-time inverter telemetry using MQTT topics. Configured AWS IoT Core for device communication and designed the MQTT topic structure for efficient routing. Built Lambda functions to process incoming data and store telemetry in DynamoDB. Exposed REST endpoints via API Gateway for retrieving device data.
-        </p>
-      </div>
-      <div>
-        <div class="about-section-label">Key Challenges</div>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0;">
-          <strong style="color:var(--text);">Real-time streaming:</strong> Used MQTT publish/subscribe model to handle continuous device-to-cloud data flow efficiently.<br><br>
-          <strong style="color:var(--text);">Event-driven architecture:</strong> Structured Lambda triggers from IoT rules for reliable, asynchronous processing.<br><br>
-          <strong style="color:var(--text);">Outcome:</strong> Real-time monitoring system with a scalable serverless backend demonstrating production-grade IoT and event-driven patterns.
-        </p>
-      </div>
-    </div>
-  </div>
-
 </section>
 
 <!-- ABOUT -->
@@ -640,7 +635,7 @@ footer a:hover { color: var(--text2); }
       <div class="about-section-label">About</div>
       <h3>Full-stack engineer &amp; founder</h3>
       <p>
-        I build and ship AI-powered applications across mobile, backend, and automation systems. I've launched products for checkout flow monitoring and AI-driven legal billing, and gained experience in quality engineering at Wellth. I prioritize problem validation first — then move quickly to deliver practical, production-ready solutions. I started building after seeing how inefficient real workflows were — from legal billing to ecommerce testing — and now focus on solving those gaps with software.
+        I design and ship AI-powered applications across mobile, backend, and automation systems. I've launched products for checkout flow monitoring and AI-driven legal billing, and gained experience in quality engineering at Wellth. I prioritize problem validation first — then move quickly to deliver practical, production-ready solutions. I started building after seeing how inefficient real workflows were — from legal billing to ecommerce testing — and now focus on solving those gaps with software.
       </p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
         <a href="Joanna-Menghamal-Resume-2026.docx" download class="btn btn-primary--blue">
